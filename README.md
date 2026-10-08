@@ -8,7 +8,7 @@ Designed to fit inside a picture frame with a 3D-printed enclosure, running for 
 
 ## Photos
 
-![Departure Board](pictures/Finished product.jpg)
+![Departure Board](pictures/Finished_product.jpg)
 *Live display showing upcoming departures, current weather, and multi-day forecast.*
 
 ![Enclosure Back](photos/enclosure_back.jpg)
