@@ -1,93 +1,102 @@
-# 🚌 ESP32 Västtrafik + Väder E-Paper Departure Display
+# ESP32 Västtrafik and Weather E-Paper Departure Board
 
-En strömsnål och stilren avgångstavla för **Västtrafik** och väderprognos (**Open-Meteo**) byggd med en **ESP32-C3 Supermini** och en **Waveshare 4.2" E-Paper display (400x300 / SSD1683)**.
+An ultra-low-power departure monitor for Swedish public transit (Västtrafik) and local weather forecasts (Open-Meteo), displayed on a Waveshare 4.2-inch black-and-white E-Paper screen and powered by an ESP32-C3 Supermini.
 
-Perfekt för att hänga på väggen i hallen eller placera i en tavelram!
-
----
-
-## ✨ Funktioner
-
-- 🚌 **Västtrafik API v4 Realtime Data**: Visar linjenummer, destination och minuter kvar till avgång.
-- 🌤️ **3-Dagars Väderprognos**: Temperatur, väderikoner och vindhastighet via avgiftsfria Open-Meteo API.
-- 🔋 **Extrem Batterieffektivitet**:
-  - **Timer Deep Sleep**: ESP32 somnar mellan uppdateringarna (strömförbrukning ~0.03 mA i vila).
-  - **Fast WiFi Reconnect**: Cachar WiFi-kanal & BSSID i RTC-minnet för blixtsnabb anslutning (<0.8s).
-  - **Nattvila (00:30 – 06:00)**: Skärmen visar en dedikerad nattvilaskärm (*"NATTVILA"* med måne, stjärnor och morgondagens väder) och sover kontinuerligt över natten.
-- 🖥️ **Snygg Typografi & Ikoner**: Anpassade väder- och WiFi-ikoner samt svensk teckenrensning.
+Designed to fit inside a picture frame with a 3D-printed enclosure, running for months on rechargeable lithium batteries.
 
 ---
 
-## 🛠️ Hårdvara som krävs
+## Photos
 
-1. **Mikrokontroller**: ESP32-C3 Supermini (eller standard ESP32 / ESP32-S3)
-2. **Skärm**: Waveshare 4.2" E-Paper Display Module (Svart/Vit, SSD1683 / GDEY042T81, 400x300 px)
-3. **Strömförsörjning**: 1S LiPo / Li-ion batteri (t.ex. 3.7V LiPo Pouch-cell eller 18650) + TP4056 laddmodul.
+![Departure Board](photos/board_front.jpg)
+*Live display showing upcoming departures, current weather, and multi-day forecast.*
+
+![Enclosure Back](photos/enclosure_back.jpg)
+*Custom 3D-printed slim mounting frame and electronics bay.*
 
 ---
 
-## 🔌 Kopplingsschema (Pinout)
+## Features
 
-| Waveshare 4.2" E-Paper | ESP32-C3 Supermini Pin | Beskrivning |
+- Real-Time Departures: Connects to Västtrafik API v4 to fetch live tram and bus departures, line designations, destinations, and remaining minutes.
+- Weather Forecast: Integrated Open-Meteo API displaying current temperature, weather icons, wind speeds, and next two days forecast.
+- Power Management:
+  - Timer Deep Sleep: The ESP32 enters deep sleep between updates, drawing only around 30 to 50 uA during standby.
+  - Fast WiFi Reconnection: Caches WiFi channel and router BSSID in RTC memory to reconnect in under 0.8 seconds.
+  - Night Rest Mode: Automatically activates between 00:30 and 06:00. Displays a dedicated night screen showing tomorrow's forecast and remains in deep sleep until morning.
+- Clean Portrait Typography: 300x400 layout optimized for high contrast, Swedish ASCII sanitization, and clean line badges.
+- Boot Safeguard: Includes a 3-second initialization delay on cold boot to ensure reliable USB flashing without sleep interruptions.
+
+---
+
+## Hardware Requirements
+
+- Microcontroller: ESP32-C3 Supermini (or standard ESP32 / ESP32-S3)
+- Display: Waveshare 4.2-inch E-Paper Module (Black/White, SSD1683 / GDEY042T81, 400x300 pixels)
+- Power: 3.7V LiPo pouch cell or 18650 Li-ion battery with a TP4056 USB-C charging board
+- Frame / Enclosure: Picture frame with 3D-printed mounting brackets
+
+---
+
+## Wiring and Pinout
+
+| Waveshare 4.2" E-Paper | ESP32-C3 Supermini Pin | Description |
 | :--- | :--- | :--- |
-| **VCC** | `3V3` | 3.3V Matning |
-| **GND** | `GND` | Jord |
-| **CLK / SCK** | `GPIO 4` | SPI Klocka |
-| **DIN / MOSI** | `GPIO 6` | SPI Data |
-| **CS** | `GPIO 7` | Chip Select |
-| **DC** | `GPIO 5` | Data / Command Control |
-| **RST** | `GPIO 3` | Reset |
-| **BUSY** | `GPIO 1` | Busy Signal |
+| VCC | 3V3 | 3.3V Power |
+| GND | GND | Ground |
+| CLK / SCK | GPIO 4 | SPI Clock |
+| DIN / MOSI | GPIO 6 | SPI MOSI (Data) |
+| CS | GPIO 7 | Chip Select |
+| DC | GPIO 5 | Data / Command |
+| RST | GPIO 3 | Hardware Reset |
+| BUSY | GPIO 1 | Busy Status Signal |
 
 ---
 
-## 💻 Mjukvarukrav & Bibliotek (Arduino IDE)
+## 3D CAD Files
 
-Följande bibliotek behövs i Arduino IDE:
+CAD models for the custom frame and component brackets are provided in the `cad/` directory:
 
-1. **GxEPD2** (av Jean-Marc Zingg) – *Sök och installera i Library Manager*
-2. **Adafruit GFX Library** – *Grafikbibliotek*
-3. **ArduinoJson** (v6 eller v7) – *För parsning av API-svar*
+- STEP (`.step` / `.stp`): Recommended for parametric CAD tools (Fusion 360, SolidWorks, FreeCAD).
+- STL (`.stl`): Ready for 3D printer slicers (Bambu Studio, PrusaSlicer, Cura).
 
 ---
 
-## 🚀 Snabbstart & Konfiguration
+## Software Dependencies
 
-1. **Klona / Ladda ner detta repository**.
-2. Öppna mappen `ESP32_Vasttrafik_E-Paper` i Arduino IDE.
-3. Öppna filen `config.h` och fyll i dina uppgifter:
+Install the following libraries using the Arduino Library Manager:
+
+1. GxEPD2 (by Jean-Marc Zingg)
+2. Adafruit GFX Library
+3. ArduinoJson (version 6 or 7)
+
+Board definition in Arduino IDE:
+- ESP32 by Espressif Systems (Select `ESP32C3 Dev Module`)
+
+---
+
+## Setup and Configuration
+
+1. Clone or download this repository.
+2. Open `config.h` and update the placeholders:
 
 ```cpp
-// 1. WiFi-uppgifter
-#define WIFI_SSID           "DITT_WIFI_SSID"
-#define WIFI_PASSWORD       "DITT_WIFI_LOSENORD"
+// WiFi Configuration
+#define WIFI_SSID           "YOUR_WIFI_SSID"
+#define WIFI_PASSWORD       "YOUR_WIFI_PASSWORD"
 
-// 2. Västtrafik API (Skaffa gratis på https://developer.vasttrafik.se/)
-#define CLIENT_ID           "DIN_CLIENT_ID"
-#define CLIENT_SECRET       "DIN_CLIENT_SECRET"
+// Västtrafik OAuth2 API Credentials
+#define CLIENT_ID           "YOUR_CLIENT_ID"
+#define CLIENT_SECRET       "YOUR_CLIENT_SECRET"
 
-// 3. Hållplats & Koordinater
-#define STOP_GID            "9021014002150000" // Exempel: Ejdergatan
-#define STOP_NAME           "Ejdergatan"
-#define TARGET_PLATFORM     'A'                // Läge/Plattform ('A', 'B' osv.)
+// Stop Location and Platform
+#define STOP_GID            "9021014002150000"  // Stop area GID
+#define STOP_NAME           "Ejdergatan"        // Header display name
+#define TARGET_PLATFORM     'A'                 // Platform filter ('A', 'B', etc.)
 
-#define LATITUDE            "57.72"            // För väder i Göteborg
-#define LONGITUDE           "12.01"
-```
-
-4. Välj kort i Arduino IDE: **ESP32C3 Dev Module** (eller motsvarande för din ESP32).
-5. Ladda upp koden!
-
----
-
-## 🔑 Hur du skaffar Västtrafik API-nycklar
-
-1. Gå till [Västtrafik Developer Portal](https://developer.vasttrafik.se/).
-2. Skapa ett konto och logga in.
-3. Skapa en **Applikation** och aktivera **Reseplaneraren v4 / Departure Board v4 API**.
-4. Kopiera din **Client ID** och **Client Secret** till `config.h`.
-5. För att hitta din hållplats **STOP_GID**, sök i Västtrafiks API eller använd deras hållplatssök-endpoint.
-
+// Weather Coordinates
+#define LATITUDE            "57.72"             // Local latitude
+#define LONGITUDE           "12.01"             // Local longitude
 ---
 
 ## 📄 Licens
