@@ -51,6 +51,9 @@ Designed to fit inside a picture frame with a 3D-printed enclosure, running for 
 | RST | GPIO 3 | Hardware Reset |
 | BUSY | GPIO 1 | Busy Status Signal |
 
+#Schematic 
+![Schematic](Pictures/schematic.png)
+
 ---
 
 ## 3D CAD Files
