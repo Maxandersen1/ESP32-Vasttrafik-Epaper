@@ -54,7 +54,7 @@ In order to achieve the low power draw the led's from the ESP32 and TP4056 were 
 | RST | GPIO 3 | Hardware Reset |
 | BUSY | GPIO 1 | Busy Status Signal |
 
-#Schematic 
+# Schematic 
 ![Schematic](Pictures/schematic.png)
 
 ---
