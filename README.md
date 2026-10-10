@@ -13,7 +13,7 @@ CAD files designed to fit "Fotoram Berlin" 9 x 12 cm available in Clas Ohlson in
 ![Departure Board](Pictures/Finished_product.jpg)
 *Live display showing upcoming departures, current weather, and multi-day forecast.*
 
-![Enclosure Back](Pictures/Backplate)
+![Enclosure Back](Pictures/Backplate.png)
 *Custom 3D-printed slim mounting frame and electronics bay.*
 
 ---
@@ -38,6 +38,7 @@ CAD files designed to fit "Fotoram Berlin" 9 x 12 cm available in Clas Ohlson in
 - Power: 3.7V LiPo pouch cell or 18650 Li-ion battery with a TP4056 USB-C charging board
 - Frame / Enclosure: Picture frame with 3D-printed mounting brackets
 
+In order to achieve the low power draw the led's from the ESP32 and TP4056 were removed 
 ---
 
 ## Wiring and Pinout
@@ -61,10 +62,7 @@ CAD files designed to fit "Fotoram Berlin" 9 x 12 cm available in Clas Ohlson in
 ## 3D CAD Files
 
 CAD models for the custom frame and component brackets are provided in the `cad/` directory:
-
 - STEP (`.step` / `.stp`): Recommended for parametric CAD tools (Fusion 360, SolidWorks, FreeCAD).
-- STL (`.stl`): Ready for 3D printer slicers (Bambu Studio, PrusaSlicer, Cura).
-
 ---
 
 ## Software Dependencies
