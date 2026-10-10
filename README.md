@@ -2,7 +2,9 @@
 
 An ultra-low-power departure monitor for Swedish public transit (Västtrafik) and local weather forecasts (Open-Meteo), displayed on a Waveshare 4.2-inch black-and-white E-Paper screen and powered by an ESP32-C3 Supermini.
 
-Designed to fit inside a picture frame with a 3D-printed enclosure, running for months on rechargeable lithium batteries.
+Designed to fit inside a picture frame with a 3D-printed enclosure, running for weeks on rechargeable lithium batteries.
+
+CAD files designed to fit "Fotoram Berlin" 9 x 12 cm available in Clas Ohlson in store or online at:  [Clas](https://www.clasohlson.com/se/p/34-4187-11)
 
 ---
 
@@ -11,7 +13,7 @@ Designed to fit inside a picture frame with a 3D-printed enclosure, running for 
 ![Departure Board](Pictures/Finished_product.jpg)
 *Live display showing upcoming departures, current weather, and multi-day forecast.*
 
-![Enclosure Back](photos/enclosure_back.jpg)
+![Enclosure Back](Pictures/Backplate)
 *Custom 3D-printed slim mounting frame and electronics bay.*
 
 ---
